@@ -1,0 +1,99 @@
+<div class="toolbar">
+  <img
+    width="100"
+    height="40"
+    alt="Angular Logo"
+    src="\assets\app_industries_logo.png"
+  />
+</div>
+<div>
+  <div class="card" style="max-width: 500px; margin: auto">
+    <div class="login-body">
+      <div class="login-panel p-fluid" style="position: relative; top: 150px">
+        <div class="login-panel-content">
+          <form
+            (ngSubmit)="login()"
+            [formGroup]="loginForm"
+            class="bg-repeat bg-gray-50 border-red-200 border-2 border w-full"
+          >
+            <div class="card">
+              <div class="mat-card">
+                <div class="grid">
+                  <div class="col-12">
+                    <h1>Sign-in</h1>
+                  </div><br>
+                  <div class="col-12">
+                    <span class="p-float-label">
+                      <input
+                        pInputText
+                        type="text"
+                        formControlName="Email"
+                        class="form-control"
+                        name="Email"
+                        [class.is-invalid]="Email.invalid && (Email.dirty || Email.touched)"
+                      />
+                      <div class ="labelstyle" *ngIf="Email.invalid && (Email.dirty || Email.touched)" class="invalid-feedback">
+                        <div class ="labelstyle" *ngIf="Email.errors?.['required']">
+                          * Email is required.
+                        </div>
+                        <div class ="labelstyle" *ngIf="Email.errors?.['email']">
+                          * Incorrect Email
+                        </div>
+                      </div>
+                      <!-- <div 
+                        [hidden]="
+                          loginForm.controls['Email'].valid ||
+                          !loginForm.controls['Email'].dirty
+                        "
+                        class="alert alert-danger"
+                      >
+                        E-mail is required
+                      </div> -->
+
+                      <label>E-mail</label><br /> </span
+                    ><br /><br>
+                    <span class="p-float-label">
+                      <input
+                        pInputText
+                        type="password"
+                        formControlName="password"
+                        class="form-control"
+                        name="password"
+                        [class.is-invalid]="password.invalid && (password.dirty || password.touched)"
+                      />
+                      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback">
+                        <div class ="labelstyle" *ngIf="password.errors?.['required']">
+                          * Password is required.
+                        </div>
+                        <div class ="labelstyle" *ngIf="password.errors?.['minlength']">
+                         * This field must have at least 6 character.
+                        </div>
+                       <div class ="labelstyle" *ngIf="password.errors?.['maxlength']">
+                       * This field must have at most 8 characters.
+                      </div>
+                      </div>
+                      <label>Password</label><br /> 
+                      
+                      </span
+                    ><br />
+                  </div>
+                  <br />
+                  <button
+                    pButton
+                    type="submit"
+                    label="Submit"
+                    
+                    class="p-button-rounded p-button-danger"
+                  ></button
+                  ><br />
+                  <!-- [disabled]="!loginForm.valid"-->
+                </div>
+              </div>
+            </div>
+          </form>
+          <p-toast position="top-right" key="tl"></p-toast>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

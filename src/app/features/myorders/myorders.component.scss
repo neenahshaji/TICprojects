@@ -1,0 +1,282 @@
+.end{
+
+    margin-left: 50px;
+}
+.start{
+  margin-left: 250px;
+}
+.summary{
+  margin-left: 50px ;
+}
+.orderdate{
+  float: right;
+}
+.orderid{
+  float: left;
+}
+.toolbar {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    background-color:#f3f0f0;
+
+    color: rgb(12, 12, 12);
+
+    font-weight: 600;
+
+  }
+
+  .toolbar img {
+
+    margin: 0 16px;
+
+  }
+
+  .spacer {
+
+    margin-right: 150px;
+
+    margin-left: 100px;
+
+    margin-top: 20px;
+
+  }
+
+  .form{
+
+    margin-top: 100px;
+
+  }
+
+
+  .inline{
+
+    line-height: 30px;
+
+  }
+
+  .order{
+
+    margin-left: 20px;
+
+    width: 1400px;
+
+  }
+  .dataView{
+    width: 70%;
+  }
+  .surface{
+
+    margin-left: 500px;
+
+  }
+
+  .back{
+
+    justify-content: center;
+    display: flex;
+    padding-bottom: 2%;
+    align-items: center;
+   
+  }
+    .mycart{
+      background-color: #f3f0f0;
+      size: 10px;
+      margin-left: 1300px;
+    }
+.vieworder_tb {
+      
+      margin-left: 15%;
+      width: 90%;
+  }
+  .p-datatable-table {
+    border-spacing: 0px;
+    width: 90%;
+  }
+
+.spacer {
+  margin-right: 150px;
+
+  margin-left: 100px;
+}
+
+.slide {
+  margin-top: 58px;
+}
+
+:host ::ng-deep {
+  .p-dropdown {
+    width: 14rem;
+    font-weight: normal;
+  }
+
+  .product-name {
+    margin: 0 0 1rem 0;
+  }
+
+  .product-description {
+    margin: 0 0 1rem 0;
+    text-align: center;
+    font-size: small;
+    // padding: 10px;
+  }
+
+  .product-category-icon {
+    vertical-align: middle;
+    margin-right: 0.5rem;
+  }
+
+  .product-category {
+    font-weight: 600;
+    vertical-align: middle;
+    text-align: right;
+  }
+
+  .product-list-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+
+    .product-list-detail {
+      flex: 1 1 0;
+    }
+
+    .p-rating {
+      margin: 0 0 0.5rem 0;
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      align-self: flex-end;
+    }
+
+    .product-list-action {
+      display: flex;
+      flex-direction: column;
+    }
+
+  }
+  
+  .product-grid-item {
+    margin: 0.5em;
+    border: 1px solid #dee2e6;
+
+    .product-grid-item-top,
+    .product-grid-item-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-grid-item-content {
+      text-align: center;
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.card {
+  padding: .5rem;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-left: 25%;
+  width: 95%;
+  height: 96%;
+}
+
+
+.vieworder{ 
+  font-size: small;
+ 
+  float: right;
+}
+.product-name {
+  margin: 0 0 0.5rem 0;
+  float: left;
+  font-size: small;
+}
+.product-description {
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+  font-size: small;
+}
+.product-part-desc{
+  font-size: small;
+}
+.p-button {
+  color: #ffffff;
+  background: #ff0011;
+  border: 0px solid #ff0011;
+  padding: 0.5rem .5rem;
+  font-size: .90rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-radius: 6px;
+}
+
+@media screen and (max-width: 576px) {
+  :host ::ng-deep .product-list-item {
+    flex-direction: column;
+    align-items: center;
+
+    .product-list-detail {
+      text-align: center;
+    }
+
+    .product-price {
+      align-self: center;
+    }
+
+    .product-list-action {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-list-action {
+      margin-top: 2rem;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+  }
+}
+.surface-section{
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-top: 1px;
+}
+.tamount
+{
+  margin-left: 500px;
+}
+.surface-card{
+  margin-left: 230px;
+  width: 1000px;
+  position: relative;
+}
+.repeatsameorder{
+  margin-top: 10px;
+  margin-left: 600px;
+}

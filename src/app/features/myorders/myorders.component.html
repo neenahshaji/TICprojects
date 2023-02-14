@@ -1,0 +1,235 @@
+<div class="toolbar">
+  <img
+    width="100"
+    height="40"
+    alt="Angular Logo"
+    routerLink="/home"
+    src="\assets\app_industries_logo.png"
+  />
+
+  <div class="mycart">
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-chevron-left"
+      label="Back"
+      class="p-button-rounded p-button-secondary p-button-text"
+      (click)="ShowOrder()"
+    ></button>
+  </div>
+</div>
+<div *ngIf="!isShowOrder">
+  <div class="form">
+    <form (ngSubmit)="Summary()" [formGroup]="Dateform">
+      <div>
+        <!-- <div class="p-field p-col-12 p-md-4">
+          <span class="p-float-label">
+            <p-calendar inputId="calendar" [(ngModel)]="value3"></p-calendar>
+            <label for="calendar">Calendar</label>
+          </span>
+        </div> -->
+        <div class="grid">
+          <div class="start col-3 p-float-label">
+            <p-calendar
+              inputId="startdate"
+              dateFormat=" dd/mm/yy"
+              formControlName="st_date1"
+            ></p-calendar>
+            <label for="startdate">Start Date</label>         
+          </div>
+          <div class="end col-3 p-float-label">           
+            <p-calendar
+              inputId="enddate"
+              dateFormat=" dd/mm/yy"
+              formControlName="st_date2"
+            ></p-calendar>
+            <label for="enddate">End Date</label>
+          </div>
+          <div class="col-3">
+            <button
+              pButton
+              type="Summary"
+              label="Summary"
+              [disabled]="!Dateform.valid"
+              class="p-button-rounded p-button-danger summary"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <br />
+
+  <div>
+    <p-dataView
+      #dv
+      [value]="myordersdata"
+      [paginator]="false"
+      filterBy="name"
+      layout="grid"
+    >
+      <ng-template let-product pTemplate="gridItem" >
+        <div class="col-6 md:col-8" (click)="OrderDetails(product.id)">
+          <div class="product-grid-item card">
+            <div class="product-grid-item-content ">
+              <div class="grid">
+              <div class="product-name orderid col-2">
+                <B class="orderid">ORDER ID #{{ product.id }}</B>
+              </div>
+              <div class="product-part-desc col-4 orderdate">
+                <div class="orderdate">
+                Order Date:
+                {{ product.orderDate | date : "dd-MM-yyyy" }}</div></div>
+                <!-- <div class="col-6 grossAmount">
+                  <div  class="grossAmount">
+                  Price : AED {{ product.grossAmount }}</div>
+                
+              </div> -->
+              <div class="vieworder col-6">
+                <div class="vieworder">
+                <a
+                  class="cursor-pointer text-pink-500 font-medium text-sm hover:text-pink-600 transition-colors transition-duration-300"
+                  tabindex="0"
+                  (click)="OrderDetails(product.id)"
+                  >View Order</a
+                ></div>
+              </div>
+            </div>
+              
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </div>
+</div>
+
+<div *ngIf="isShowOrder">
+  <div *ngIf="ordersdata" class="surface-section px-4 py-8 md:px-6 lg:px-8">
+    <br />
+    <div class="font-medium text-3xl text-900 mb-3">
+      #Order {{ ordersdata.id }}
+    </div>
+    <ul class="list-none p-0 m-0" *ngFor="let item of ordersdata.details">
+      <li
+        class="flex flex-column md:flex-row border-top-1 border-bottom-1 surface-border md:align-items-center"
+      >
+        <div class="flex-auto py-2">
+          <div
+            class="flex flex-wrap align-items-start sm:align-items-center sm:flex-row sm:justify-content-between surface-border"
+          >
+            <div class="w-full sm:w-6 flex flex-column">
+              <span>{{ item.itemName }}</span>
+            </div>
+            <div
+              class="w-full sm:w-6 flex align-items-start justify-content-between mt-3 sm:mt-0"
+            >
+              <div></div>
+              <div class="flex flex-column sm:align-items-end">
+                <span class="text-900 text-xl font-medium mb-2 sm:mb-3"></span>
+                <a class="flex flex-column sm:align-items-end"
+                  >Qty:{{ item.qty }}</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-column">
+            <span class="inline-flex align-items-center mb-0">
+              <span class="text-600 mr-2">Item Code : {{ item.itemCode }}</span>
+            </span>
+            <span class="inline-flex align-items-center mb-0">
+              <span class="text-600 mr-2">UOM : {{ item.uom }}</span>
+            </span>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="flex">
+      <div class="w-12rem hidden md:block"></div>
+      <ul class="list-none py-0 pr-0 pl-0 md:pl-5 mt-6 mx-0 mb-0 flex-auto">
+        <li class="flex justify-content-between mb-4">
+          
+        </li>
+      </ul>
+    </div>
+    <div >
+      <ul class="list-none p-0 m-0">
+          
+          
+          <li class="flex align-items-center py-2 px-2 surface-border flex-wrap" *ngIf="ordersdata.remarks">
+              <div class="text-900 w-6 md:w-2 font-medium">Remarks :</div>
+              <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+
+                <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="ordersdata.remarks" />
+              </div>
+              
+          </li>
+          <li class="flex align-items-center py-2 px-2 surface-border flex-wrap">
+              <div class="text-900 w-6 md:w-2 font-medium">Po No : </div>
+              <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="ordersdata.poNumber" />
+                </div>
+              
+          </li>
+          <li class="flex  py-2 px-2  surface-border flex-wrap">
+              <div class="text-900 w-6 md:w-2 font-medium">Address :</div>
+              <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 " style="white-space:pre-line">
+               
+                <textarea rows="3" cols="30" pInputTextarea [autoResize]="true" [disabled]="true">{{ordersdata.address}}</textarea>
+                  </div>
+              
+          </li>
+      </ul>
+  </div>
+
+  </div>
+
+  <footer>
+    <div class="col-12 md:col-6 lg:col-3">
+      <div class="surface-card shadow-2 p-3 border-round">
+        <div class="flex justify-content-between mb-0">
+          <div>
+            <span class="block text-500  font-medium mb-3">Order Date</span>
+            <div *ngIf="ordersdata" class="text-900 font-medium text-xl">
+              {{ ordersdata.orderDate | date : "dd-MM-yyyy" }}
+            </div>
+          </div>
+          <div>
+            <button
+              pButton
+              pRipple
+              type="button"
+              label="Repeat same order"
+              routerLink="/cart"
+              (click)="RepeatOrder()"
+              class="repeatsameorder p-button-rounded p-button-danger"
+            ></button>
+          </div>
+          <p-dialog
+            [(visible)]="displayyModal"
+            [style]="{ width: '50vw' }"
+            [baseZIndex]="10000"
+          >
+            <h1><strong>Order Sucessfull!</strong></h1>
+            <ng-template pTemplate="footer">
+              <p-button
+                type="button"
+                class="mr-2"
+                (click)="display()"
+                label="View Order"
+                styleClass="p-button-text"
+              ></p-button>
+              <p-button
+                icon="pi pi-times"
+                routerLink="/home"
+                label="Cancel"
+              ></p-button>
+            </ng-template>
+          </p-dialog>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

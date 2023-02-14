@@ -1,0 +1,327 @@
+.login-body {
+  text-align: center;
+
+  justify-content: center;
+}
+
+.mat-card {
+  max-width: 400px;
+
+  margin: 2em auto;
+
+  text-align: center;
+}
+
+.card-body {
+  background-color: var(--pink-100) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 8px 0;
+}
+
+p {
+  margin: 0;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.toolbar {
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  right: 0;
+
+  height: 70px;
+
+  display: flex;
+
+  align-items: center;
+
+  background-color: #dd97ac;
+
+  color: white;
+
+  font-weight: 600;
+}
+
+.toolbar img {
+  margin: 0 16px;
+}
+.profileimage{
+  width: 10rem;
+}
+
+.profile-body {
+  // border-top: 10px solid rgb(213, 118, 118);
+
+  // background-color: #aa9498;
+  width: 60%;
+
+  margin-top: 100px;
+
+  margin-left: 300px;
+
+  margin-right: 100px;
+
+  margin-bottom: 100px;
+}
+
+.profile-name {
+  margin-top: 1px;
+
+  margin-right: 100px;
+}
+
+.mycart {
+  background-color: #dd97ac;
+
+  size: 10px;
+
+  margin-top: 100px;
+}
+
+.spacer {
+  margin-right: 150px;
+
+  margin-left: 100px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 8px 0;
+}
+
+p {
+  margin: 0;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.toolbar {
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  right: 0;
+
+  height: 70px;
+
+  display: flex;
+
+  align-items: center;
+
+  background-color: #f3f0f0;
+
+  color: rgb(10, 10, 10);
+
+  font-weight: 600;
+}
+
+.toolbar img {
+  margin: 0 16px;
+}
+
+.spacer {
+  margin-right: 150px;
+
+  margin-left: 100px;
+}
+
+.slide {
+  margin-top: 58px;
+
+  // background-color: #ece0e4;
+}
+
+:host ::ng-deep {
+  .p-dropdown {
+    width: 14rem;
+
+    font-weight: normal;
+  }
+
+  .product-name {
+    font-size: 1.5rem;
+
+    font-weight: 700;
+  }
+
+  .product-description {
+    margin: 0 0 1rem 0;
+  }
+
+  .product-category-icon {
+    vertical-align: middle;
+
+    margin-right: 0.5rem;
+  }
+
+  .product-category {
+    font-weight: 600;
+
+    vertical-align: middle;
+  }
+
+  .product-list-item {
+    display: flex;
+
+    align-items: center;
+
+    padding: 1rem;
+
+    width: 100%;
+
+    img {
+      width: 150px;
+
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+      margin-right: 2rem;
+    }
+
+    .product-list-detail {
+      flex: 1 1 0;
+    }
+
+    .p-rating {
+      margin: 0 0 0.5rem 0;
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+
+      font-weight: 600;
+
+      margin-bottom: 0.5rem;
+
+      align-self: flex-end;
+    }
+
+    .product-list-action {
+      display: flex;
+
+      flex-direction: column;
+    }
+
+    .p-button {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .product-grid-item {
+    margin: 0.5em;
+
+    border: 1px solid #dee2e6;
+
+    .product-grid-item-top,
+    .product-grid-item-bottom {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+    }
+
+    img {
+      width: 75%;
+
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+      margin: 2rem 0;
+    }
+
+    .product-grid-item-content {
+      text-align: center;
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+
+      font-weight: 600;
+    }
+  }
+}
+
+.card {
+  padding: 2rem;
+
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
+
+  border-radius: 4px;
+
+  margin-bottom: 2rem;
+
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 576px) {
+  :host ::ng-deep .product-list-item {
+    flex-direction: column;
+
+    align-items: center;
+
+    img {
+      width: 75%;
+
+      margin: 2rem 0;
+    }
+
+    .product-list-detail {
+      text-align: center;
+    }
+
+    .product-price {
+      align-self: center;
+    }
+
+    .product-list-action {
+      display: flex;
+
+      flex-direction: column;
+    }
+
+    .product-list-action {
+      margin-top: 2rem;
+
+      flex-direction: row;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      width: 100%;
+    }
+  }
+
+  .p-button-secondary {
+    background-color: #dd97ac;
+  }
+
+  .mycart {
+    background-color: #dd97ac;
+
+    size: 10px;
+
+    margin-top: 100px;
+  }
+}

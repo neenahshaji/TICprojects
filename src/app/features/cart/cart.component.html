@@ -1,0 +1,514 @@
+<!-- <div class="toolbar">
+     
+  <img
+    width="100"
+    height="40"
+    alt="Angular Logo"
+    routerLink="/home"
+    src="\assets\app_industries_logo.png"
+  />   
+  <div class="spacer">
+           
+    <div class="login-panel p-fluid">       </div>
+       
+  </div>
+     
+  <button
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-chevron-left"
+    label="Back"
+    class="p-button-rounded p-button-secondary p-button-text"
+    routerLink="/home"
+  ></button>
+</div>
+<div *ngIf="products">
+  <div class="cart">
+    <div class="bag">
+      <h1 class="text-600 mr-2">Shopping Bag</h1>
+    </div>
+    <div class="removeall">
+      <a
+        class="cursor-pointer text-pink-500 font-medium text-sm hover:text-pink-600 transition-colors transition-duration-300"
+        tabindex="0"
+        (click)="Removeall()"
+        >Remove All</a
+      >
+    </div>
+
+    <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+      <ul class="list-none p-0 m-0" *ngFor="let product of products; let i = index">
+        <li
+          class="flex flex-column md:flex-row border-top-1 border-bottom-1 surface-border md:align-items-center"
+        >
+          <div class="flex-auto py-2">
+            <div
+              class="flex flex-wrap align-items-start sm:align-items-center sm:flex-row sm:justify-content-between surface-border"
+            >
+              <div class="w-full sm:w-6 flex flex-column">
+                <span class="text-900 text-xl font-medium mb-3">{{
+                  product.itemName
+                }}</span>
+              </div>
+              <div
+                class="w-full sm:w-6 flex align-items-start justify-content-between mt-3 sm:mt-0"
+              >
+                <div class="quantity">
+                  <p-inputNumber
+                    [showButtons]="true"
+                    buttonLayout="horizontal"
+                    spinnerMode="horizontal"
+                    inputStyleClass="w-3rem text-center py-2 px-1 border-transparent"
+                    [(ngModel)]="product.qty"
+                    (onInput)="quantityChange($event,i)"
+                    class="border-1 surface-border border-round"
+                    decrementButtonClass="p-button-text py-1 px-1"
+                    incrementButtonClass="p-button-text py-1 px-1"
+                    incrementButtonIcon="pi pi-plus"
+                    [min]="1"
+                    decrementButtonIcon="pi pi-minus"
+                    (ngModelChange)="GrossAmount()"
+                  ></p-inputNumber>
+                </div>
+                <div class="flex flex-column sm:align-items-end">
+                  <span
+                    class="text-900 text-xl font-medium mb-2 sm:mb-3"
+                  ></span>
+                  
+                  <a
+                    class="cursor-pointer text-pink-500 font-medium text-sm hover:text-pink-600 transition-colors transition-duration-300"
+                    tabindex="0"
+                    (click)="confirm1(product)"
+                    >Remove</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-column">
+              <span class="inline-flex align-items-center mb-0">
+                <span class="text-600 mr-2"
+                  >Item Code : {{ product.itemCode }}</span
+                >
+              </span>
+              <span class="inline-flex align-items-center mb-0">
+                <span class="text-600 mr-2">UOM : {{ product.uom }}</span>
+              </span>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="flex">
+        <div class="w-12rem hidden md:block"></div>
+        <ul class="list-none py-0 pr-0 pl-0 md:pl-5 mt-6 mx-0 mb-0 flex-auto">
+          <li class="flex justify-content-between mb-4">
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <form *ngIf="products" [formGroup]="orderForm">
+        <div class="address-field p-fluid">
+          <span class="p-float-label">
+            <textarea
+              rows="5"
+              type="text"
+              pInputTextarea
+              [autoResize]="true"
+              formControlName="address"
+              name="address"
+              class="form-control"
+            ></textarea>
+
+            <label for="address">Enter a Delivery Address...</label> </span
+          ><br />
+
+          <div class="place">
+            <button
+              pButton
+              pRipple
+              type="submit"
+              label="Place Order"
+              class="p-button-raised p-button-secondary"
+              [disabled]="!orderForm.valid"
+              (click)="showModalDialog()"
+            ></button>
+          </div>
+        </div>
+      </form>
+
+      <form [formGroup]="placeorder">
+        <p-dialog
+          header="CONFIRM"
+          [(visible)]="displayModal"
+          [modal]="true"
+          [style]="{ width: '50vw' }"
+          [draggable]="false"
+          [resizable]="false"
+          position="center"
+        >
+          <p class="m-0">Are you sure want to place this order?</p>
+          <br /><br />
+
+          <div class="confirmation p-fluid">
+            <input
+              type="text"
+              placeholder="PoNumber"
+              pInputText
+              formControlName="poNumber"
+            /><br />
+
+            <br />
+
+            <input
+              type="text"
+              placeholder="Remarks"
+              pInputText
+              formControlName="remarks"
+            />
+          </div>
+
+          <ng-template pTemplate="footer">
+            <p-button
+              label="Place Order"
+              styleClass="p-button-text"
+              (click)="CreateOrder()"
+            ></p-button>
+          </ng-template>
+        </p-dialog>
+      </form>
+     
+    </div>
+
+    <p-confirmDialog
+      [style]="{ width: '50vw' }"
+      [baseZIndex]="10000"
+      rejectButtonStyleClass="p-button-text"
+    ></p-confirmDialog>
+  </div>
+  
+</div>
+<div  *ngIf="!products">
+  <p class="cartempty">Your cart is empty!</p><br>
+    <div class="center">
+     <button pButton pRipple type="button" label="Shop now" class="p-button-danger" routerLink="/home">
+
+     </button> 
+  
+  <div class="pageload" *ngIf="isSpinner">
+     <p-progressSpinner></p-progressSpinner>
+  </div>
+  <p-dialog
+  [(visible)]="displayyModal"
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+>
+  <h1><strong>Order Sucessfull!</strong></h1>
+  <ng-template pTemplate="footer">
+    <p-button
+      type="button"
+      class="mr-2"
+      routerLink="/vieworder"
+      label="View Order"
+      styleClass="p-button-text"
+    ></p-button>
+    <p-button
+      icon="pi pi-times"
+      routerLink="/home"
+      label="Cancel"
+    ></p-button>
+  </ng-template>
+</p-dialog></div></div> -->
+<div class="toolbar">
+  <img width="100" height="40" alt="Angular Logo" routerLink="/home" src="\assets\app_industries_logo.png" />
+  <div class="spacer">
+    <div class="login-panel p-fluid">
+    </div>
+  </div>
+  <button pButton pRipple type="button" icon="pi pi-chevron-left" label="Back"
+    class="p-button-rounded p-button-secondary p-button-text" routerLink="/home"></button>
+</div>
+<div *ngIf="products">
+  <div class="cart">
+    <div class="bag">
+      <h1 class="text-600 mr-2">Shopping Bag</h1>
+    </div>
+    <div class="removeall">
+      <a class="cursor-pointer text-pink-500 font-medium text-sm hover:text-pink-600 transition-colors transition-duration-300"
+        tabindex="0" (click)="Removeall()">Remove All</a>
+    </div>
+
+    <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+      <ul class="list-none p-0 m-0" *ngFor="let product of products; let i = index">
+        <li class="flex flex-column md:flex-row border-top-1 border-bottom-1 surface-border md:align-items-center">
+          <div class="flex-auto py-2">
+            <div
+              class="flex flex-wrap align-items-start sm:align-items-center sm:flex-row sm:justify-content-between surface-border">
+              <div class="w-full sm:w-6 flex flex-column">
+                <span class="text-900 text-xl font-medium mb-3">{{
+                  product.itemName
+                  }}</span>
+              </div>
+              <div class="w-full sm:w-6 flex align-items-start justify-content-between mt-3 sm:mt-0">
+                <div class="quantity">
+                  <p-inputNumber [showButtons]="true" buttonLayout="horizontal" spinnerMode="horizontal"
+                    inputStyleClass="w-3rem text-center py-2 px-1 border-transparent" [(ngModel)]="product.qty"
+                    (onInput)="quantityChange($event,i)" class="border-1 surface-border border-round"
+                    decrementButtonClass="p-button-text py-1 px-1" incrementButtonClass="p-button-text py-1 px-1"
+                    incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+                    [min]="1" 
+                    (ngModelChange)="GrossAmount()"></p-inputNumber>
+                </div>
+                <div class="flex flex-column sm:align-items-end">
+                  <span class="text-900 text-xl font-medium mb-2 sm:mb-3"></span>
+                  <!-- <p>${{ product.grossAmount | number : ".0-2" }}</p> -->
+                  <a class="cursor-pointer text-pink-500 font-medium text-sm hover:text-pink-600 transition-colors transition-duration-300"
+                    tabindex="0" (click)="confirm1(product)">Remove</a>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-column">
+              <span class="inline-flex align-items-center mb-0">
+                <span class="text-600 mr-2">Item Code : {{ product.itemCode }}</span>
+              </span>
+              <span class="inline-flex align-items-center mb-0">
+                <span class="text-600 mr-2">UOM : {{ product.uom }}</span>
+              </span>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="flex">
+        <div class="w-12rem hidden md:block"></div>
+        <ul class="list-none py-0 pr-0 pl-0 md:pl-5 mt-6 mx-0 mb-0 flex-auto">
+          <li class="flex justify-content-between mb-4">
+            <!-- <span class="tamount text-xl text-900">Total Amount </span>
+            <span class="text-xl text-900">${{ t_gross | number : ".0-2" }}</span> -->
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <form [formGroup]="orderForm">
+        <div class="address-field p-fluid">
+          <!-- <span class="p-float-label">
+             
+            <span>
+            <textarea rows="5" type="text" pInputTextarea [autoResize]="true" formControlName="address" name="address"
+              class="form-control"></textarea>
+            </span>
+          </span><br />
+
+          <div class="place">
+            <button pButton pRipple type="submit" label="Place Order" class="p-button-raised p-button-secondary"
+              [disabled]="!orderForm.valid" (click)="showModalDialog()"></button>
+          </div> -->
+          <ul class="list-none p-0 m-0">
+
+            <li class="flex align-items-center py-2 px-2 surface-border flex-wrap">
+              <div class="text-900 w-6 md:w-2 font-medium">Delivery Address</div>
+              <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1" *ngIf="!orderdetails">
+                <textarea rows="5" type="text" pInputTextarea [autoResize]="true" formControlName="address"
+                  name="address" class="form-control" [class.is-invalid]="address.invalid && (address.dirty || address.touched)"></textarea>
+              </div>
+              
+              <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1" *ngIf="orderdetails">
+                <textarea rows="5" type="text" pInputTextarea [autoResize]="true" formControlName="address"
+                  name="address" class="form-control" ngModel="{{orderdetails.address}}" [class.is-invalid]="address.invalid && (address.dirty || address.touched)"></textarea>
+              </div>
+              <div class ="labelstyle" *ngIf="address.invalid && (address.dirty || address.touched)" class="invalid-feedback">
+                <div class ="labelstyle" *ngIf="address.errors?.['required']">
+                  * Address is required.
+                </div></div>
+
+            </li>
+            <li class="flex align-items-center py-2 px-2 surface-border flex-wrap">
+              <div class="text-900 w-6 md:w-2 font-medium">PoNumber</div>
+              <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1" *ngIf="!orderdetails">
+                <input type="text" pInputText formControlName="poNumber" name="poNumber" />
+              </div>
+              <div class ="labelstyle" *ngIf="poNumber.invalid && (poNumber.dirty || poNumber.touched)" class="invalid-feedback">
+                <div class ="labelstyle" *ngIf="poNumber.errors?.['required']">
+                  * PoNumber is required.
+                </div></div>
+              <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1" *ngIf="orderdetails">
+                <input type="text" pInputText formControlName="poNumber" name="poNumber"
+                  ngModel="{{orderdetails.poNumber}}" />
+              </div>
+
+            </li>
+            <li class="flex  py-2 px-2  surface-border flex-wrap">
+              <div class="text-900 w-6 md:w-2 font-medium">Remarks</div>
+              <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 ">
+
+                <input type="text" pInputText formControlName="remarks" name="remarks" />
+              </div>
+
+            </li>
+            <!-- <p-button label="Place Order"  (click)="CreateOrder()" class="p-button-raised p-button-secondary"></p-button> -->
+            <div class="place">
+              <button pButton pRipple type="submit" label="Place Order" class="p-button-raised p-button-secondary"
+                 (click)="showModalDialog()"></button>
+            </div>
+          </ul>
+        </div>
+        <!-- <div  class="surface-section">
+          <ul class="list-none p-0 m-0">
+              
+              
+              <li class="flex align-items-center py-2 px-2 surface-border flex-wrap" >
+                  <div class="text-900 w-6 md:w-2 font-medium">Delivery Address</div>
+                  <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1"> 
+                    <textarea rows="5" type="text" pInputTextarea [autoResize]="true" formControlName="address" name="address"
+              class="form-control"></textarea>
+                    
+                  </div>
+                  
+              </li>
+              <li class="flex align-items-center py-2 px-2 surface-border flex-wrap">
+                  <div class="text-900 w-6 md:w-2 font-medium">PoNumber</div>
+                  <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                    <input type="text" pInputText formControlName="poNumber" name="poNumber"/> 
+                  </div>
+                  
+              </li>
+              <li class="flex  py-2 px-2  surface-border flex-wrap">
+                  <div class="text-900 w-6 md:w-2 font-medium">Remarks</div>
+                  <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 " >
+                      
+                    <input type="text"  pInputText formControlName="remarks" name="remarks"/>
+                      </div>
+                  
+              </li>
+              <p-button label="Place Order" styleClass="p-button-text" (click)="CreateOrder()"></p-button>
+          </ul>
+      </div> -->
+
+      </form>
+
+      <form [formGroup]="placeorder">
+        <p-dialog header="CONFIRM" [(visible)]="displayModal" [modal]="true" [style]="{ width: '50vw' }"
+          [draggable]="false" [resizable]="false">
+          <p class="m-0">Are you sure want to place this order?</p>
+          <br /><br />
+
+          <!-- <div class="confirmation p-fluid">
+            PoNumber
+            <input readonly type="text" placeholder="PoNumber" pInputText /><br />
+
+            <br />
+
+            <input type="text" placeholder="Remarks" pInputText formControlName="remarks" />
+          </div> -->
+          <!-- <div class="confirmation p-fluid">
+            PoNumber
+            <input readonly type="text" placeholder="PoNumber" pInputText /><br />
+
+            <br />
+
+            <input type="text" placeholder="Remarks" pInputText formControlName="remarks" />
+          </div> -->
+          <!-- <div class="confirmation p-fluid">
+            PoNumber
+            <input readonly type="text" placeholder="{{orderForm.value.remarks}}"formControlName="crtrpoNumber" pInputText /><br />
+
+            <br />
+            
+            Address
+            <input readonly type="text" placeholder="{{orderForm.value.address}}" formControlName="crtaddress"pInputText /><br />
+          </div> -->
+          <ul class="list-none p-0 m-0">
+            <li class="flex  py-2 px-2  surface-border flex-wrap" *ngIf="orderForm.value.remarks">
+              <div class="text-600 w-6 md:w-2 font-medium">Remarks</div>
+              <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 ">
+                {{orderForm.value.remarks}}
+
+              </div>
+
+            </li>
+
+            <li class="flex align-items-center py-2 px-2 surface-border flex-wrap">
+              <div class="text-600 w-6 md:w-2 font-medium">PoNumber</div>
+              <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                {{orderForm.value.poNumber}}
+
+              </div>
+
+            </li>
+            <li class="flex align-items-center py-2 px-2 surface-border flex-wrap">
+              <div class="text-600 w-6 md:w-2 font-medium">Delivery Address </div>
+              <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1" style="white-space:pre-wrap">
+                {{orderForm.value.address}}
+              </div>
+
+            </li>
+
+          </ul>
+          <div>
+            <!-- <ul class="list-none p-0 m-0">
+              
+              
+              <li class="flex align-items-center py-2 px-2 surface-border flex-wrap" *ngIf="orderForm.value.remarks">
+                  <div class="text-900 w-6 md:w-2 font-medium">Remarks :</div>
+                  <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+    
+                    <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="orderForm.value.remarks" />
+                  </div>
+                  
+              </li>
+              <li class="flex align-items-center py-2 px-2 surface-border flex-wrap">
+                  <div class="text-900 w-6 md:w-2 font-medium">Po No : </div>
+                  <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                    <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="orderForm.value.poNumber" />
+                    </div>
+                  
+              </li>
+              <li class="flex  py-2 px-2  surface-border flex-wrap">
+                  <div class="text-900 w-6 md:w-2 font-medium">Address :</div>
+                  <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 " style="white-space:pre-line">
+                   
+                    <textarea rows="3" cols="30" pInputTextarea [autoResize]="true" [disabled]="true">{{orderForm.value.address}}</textarea>
+                      </div>
+                  
+              </li>
+          </ul> -->
+          </div>
+
+          <ng-template pTemplate="footer">
+            <p-button label="Proceed" styleClass="p-button-text" (click)="CreateOrder()"></p-button>
+          </ng-template>
+        </p-dialog>
+      </form>
+
+    </div>
+
+    <p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"
+      rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+  </div>
+
+</div>
+
+<div>
+  <div *ngIf="!products">
+    <p class="cartempty">Your cart is empty!</p><br>
+
+    <div class="center">
+      <button pButton pRipple type="button" label="Shop now" class="p-button-danger" routerLink="/home"></button>
+    </div>
+  </div>
+  <div class="pageload" *ngIf="isSpinner">     
+    <p-progressSpinner></p-progressSpinner> 
+  </div> 
+  <p-dialog  [(visible)]="displayyModal"   [style]="{ width: '50vw' }"   [baseZIndex]="10000"> 
+    <h1>
+      <strong>Order Sucessfull!</strong>
+    </h1> 
+    <ng-template pTemplate="footer">   
+      <p-button type="button"       class="mr-2" routerLink="/vieworder" label="View Order" styleClass="p-button-text"  
+         ></p-button>   
+      <p-button icon="pi pi-times" routerLink="/home" label="Cancel"    ></p-button> 
+    </ng-template>
+  </p-dialog>
+
+</div>

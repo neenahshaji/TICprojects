@@ -1,0 +1,40 @@
+.toolbar {
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  right: 0;
+
+  height: 70px;
+
+  display: flex;
+
+  align-items: center;
+
+  background-color: #f3f0f0;
+
+  color: rgb(12, 12, 12);
+
+  font-weight: 600;
+
+}
+
+.toolbar img {
+
+  margin: 0 16px;
+
+}
+.spacer{
+  margin-left: 1200px;
+}
+.tamount{
+  margin-left: 700px;
+}
+.surface-section{
+  margin-left: 100px;
+  margin-right: 100px;
+  // width: 1100px;
+}

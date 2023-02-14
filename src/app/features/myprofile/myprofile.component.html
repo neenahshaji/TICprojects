@@ -1,0 +1,93 @@
+<div class="toolbar">
+     
+  <img
+    width="100"
+    height="40"
+    alt="Angular Logo"
+    routerLink="/home"
+    src="\assets\app_industries_logo.png"
+  />   
+  <div class="spacer">
+           
+    <div class="login-panel p-fluid">       </div>
+       
+  </div>
+     
+  <button
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-chevron-left"
+    label="Back"
+    class="p-button-rounded p-button-secondary p-button-text"
+    routerLink="/home"
+  ></button
+  >      
+  <button
+    type="button"
+    pButton
+    icon="pi pi-bars"
+    class="p-button p-button-secondary p-button-text"
+    (click)="menu.toggle($event)"
+  ></button
+  >    <p-menu #menu [popup]="true" [model]="items"></p-menu>&nbsp;&nbsp;   
+</div>
+
+<div *ngIf="details">
+  <div class="profile-body">
+    <div class="surface-section">
+      <div class="font-medium text-3xl text-900 mb-3">My Profile</div>
+
+      <div class="text-500 mb-5"></div>
+
+      <ul class="list-none p-0 m-0">
+        <li
+          class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap"
+        >
+          <img class="profileimage" src="\assets\no-image-icon-6.png" />
+
+          <div class="w-6 md:w-2 flex justify-content-end"></div>
+        </li>
+
+        <li
+          class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap"
+        >
+          <div class="text-500 w-6 md:w-2 font-medium">Name</div>
+
+          <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+            {{ details.name }}
+          </div>
+
+          <div class="w-6 md:w-2 flex justify-content-end"></div>
+        </li>
+
+        <li
+          class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap"
+        >
+          <div class="text-500 w-6 md:w-2 font-medium">Email</div>
+
+          <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+            {{ details.email }}
+          </div>
+
+          <div class="w-6 md:w-2 flex justify-content-end"></div>
+        </li>
+
+        <li
+          class="flex align-items-center py-3 px-2 border-top-1 border-bottom-1 surface-border flex-wrap"
+        >
+          <div class="text-500 w-6 md:w-2 font-medium">City</div>
+
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 line-height-3"
+          >
+            {{ details.city }}
+          </div>
+
+          <div class="w-6 md:w-2 flex justify-content-end"></div>
+        </li>
+      </ul>
+    </div>
+    <br /><br />
+  </div>
+</div>

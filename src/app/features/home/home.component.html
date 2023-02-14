@@ -1,0 +1,307 @@
+<div class="toolbar">
+  <img
+    width="100"
+    height="40"
+    alt="Angular Logo"
+    routerLink="/home"
+    src="\assets\app_industries_logo.png"
+  />
+
+  <div class="spacer">
+    <div class="login-panel p-fluid">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <i class="pi pi-times close" (click)="clearFilter()" ></i>
+        <input
+          type="text"
+          name="searchInput"
+          [(ngModel)]="searchInput"
+          pInputText
+          (keyup)="searchByData($event,'search')"
+          placeholder="Search"
+        />
+      </span>
+      <!-- <mat-form-field class="example-form-field">
+        <input matInput type="text" placeholder="Clearable input" [(ngModel)]="value">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field> -->
+    </div>
+  </div>
+
+  <div class="mycart">
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-shopping-cart"
+      class="p-button p-button-secondary p-button-text"
+      routerLink="/cart"
+      *ngIf="cartpop"
+    >
+      </button
+    >
+    <button
+      *ngIf="!cartpop"
+      pButton
+      class="p-button p-button-secondary p-button-text pop"
+      routerLink="/cart"
+    >
+      
+      <i
+        class="pi pi-shopping-cart"
+        pBadge
+        style="font-size: 1rem"
+        severity="danger"
+        value="{{ len }}"
+      ></i
+      >
+    </button>
+  </div>
+
+  <button
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-shopping-bag"
+    class="p-button p-button-secondary p-button-text"
+    routerLink="/myorders"
+  ></button>
+  <button
+    type="button"
+    pButton
+    icon="pi pi-bars"
+    class="p-button p-button-secondary p-button-text"
+    (click)="menu.toggle($event)"
+  ></button>
+
+  <p-menu #menu [popup]="true" [model]="items"></p-menu>
+</div>
+<!-- <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+  
+  <div class="flex flex-wrap lg:flex-nowrap">
+      <div class="col-fixed lg:col-2 mr-4 flex p-0 flex-column w-full lg:w-3">
+          
+          <p-accordion [multiple]="true" styleClass="-mb-1 mt-3">
+              <p-accordionTab [selected]="true" header="Brand">
+                  <div class="transition-all transition-duration-400 transition-ease-in-out">
+                      
+                     
+                          <div class="p-field-checkbox" *ngFor="let brand of branddetails">
+                            
+                              <p-checkbox class="p-field-checkbox" [value]="brand.brandId" [inputId]="brand.brandId" [(ngModel)]="selectBoxes"></p-checkbox>
+                              <label [for]="brand.brandId" class="text-900">{{ brand.brandId }}</label></div>
+                          
+                          
+                      <a tabindex="0" class="block cursor-pointer my-3 text-primary font-medium">Show all...</a>
+                  </div>
+              </p-accordionTab>
+          </p-accordion>
+      </div>
+      <div class="w-full border-2 border-dashed surface-border surface-section mt-3 lg:mt-0" style="min-height:25rem;"></div>
+  </div>
+</div> -->
+<br /><br />
+<div class="main">
+  <div class="col-2">
+    <div>
+    <p-accordion [multiple]="true" styleClass="-mb-1 mt-3">
+      <p-accordionTab [selected]="false" header="Brand">
+        <div
+          class="transition-all transition-duration-400 transition-ease-in-out"
+        >
+          <div class="p-field-checkbox" *ngFor="let brand of branddetails">
+            <div *ngIf="brand.brandId">
+              <p-checkbox
+                class="p-field-checkbox"
+                [value]="brand.brandId"
+                [inputId]="brand.brandId"
+                [(ngModel)]="selectBoxes"
+                (onChange)="searchByBrand($event,'brand')"
+              ></p-checkbox>
+              <label [for]="brand.brandId" class="text-900">{{
+                brand.brandId
+              }}</label>
+            </div>
+          </div>
+        </div>
+      </p-accordionTab> </p-accordion
+    ></div><br /><br />
+    <div>
+    <p-accordion [multiple]="true" styleClass="-mb-1 mt-3">
+      <p-accordionTab [selected]="false" header="Category">
+        <div
+          class="transition-all transition-duration-400 transition-ease-in-out"
+        >
+          <div
+            class="p-field-checkbox"
+            *ngFor="let category of categoriesdetails"
+          >
+            <div *ngIf="category.categoryId">
+              <p-checkbox
+                class="p-field-checkbox"
+                [value]="category.categoryId"
+                [inputId]="category.categoryId"
+                [(ngModel)]="selectBoxes"
+                (onChange)="searchByBrand($event,'category')"
+              ></p-checkbox>
+              <label [for]="category.categoryId" class="text-900">{{
+                category.categoryId
+              }}</label>
+            </div>
+          </div>
+        
+        </div>
+      </p-accordionTab>
+    </p-accordion></div>
+    <!-- <div *ngFor="let brand of branddetails" class="p-field-checkbox">
+      <p-checkbox
+        name="group1"
+        value="category"
+        [value]="brand.brandId"
+        [(ngModel)]="selectBoxes"
+        [inputId]="brand.brandId"
+        (onChange)="GetBrand(selectBoxes)"
+      ></p-checkbox>
+      <label [for]="brand.brandId">{{ brand.brandId }}</label>
+    </div> -->
+    <!-- <h1 style="font-weight: normal">Categories</h1>
+    <div *ngFor="let category of categoriesdetails" class="p-field-checkbox">
+      <p-checkbox
+        name="group2"
+        value="category"
+        [value]="category.categoryId"
+        [(ngModel)]="selectedBoxes"
+        [inputId]="category.categoryId"
+        (onChange)="GetCategorie(selectedBoxes)"
+        ><br /><br
+      /></p-checkbox>
+      <label [for]="category.key">{{ category.categoryId }}</label>
+    </div> -->
+  </div>
+  
+  <div class="col-8">
+    <div class="card" infinite-scroll 
+    [infiniteScrollDistance]="1"
+    [infiniteScrollThrottle]="500"
+     (scrolled)="onScroll($event)">
+      <p-dataView
+        #dv
+        [value]="displayData"
+        filterBy="name"
+        layout="grid"
+        [paginator]="false" 
+      >
+      <!-- (3onPageChange)="paginate($event)"[rows]="10"
+        [lazy]="true" (onLazyLoad)="loadData($event)"  [totalRecords]="500" -->
+        <ng-template let-product pTemplate="gridItem">
+          <div class="col-12 md:col-3">
+            <div class="product-grid-item card">
+              <div class="product-grid-item-content container">
+                <img
+                class="row"
+                  alt="Card"
+                  src="\assets\no-image-icon-6.png"
+                  style="max-width: 50%"
+                />
+                <div class="product-name row" style="height:40px">
+                  <B>{{ product.description }}</B>
+                </div>
+                <div class="product-part-desc row">
+                  <div class="product-description">
+                    Item Code:
+                    {{ product.partNumber }} &nbsp;&nbsp;&nbsp;
+                    Category Id:
+                    {{ product.categoryId }}
+                  </div>
+                 Brand Id:
+                  {{ product.brandId }}
+                </div>
+                <div class="addbutton row bottom-0">
+                  <button
+                    pButton
+                    pRipple
+                    class="p-button-danger"
+                    icon="pi pi-shopping-cart"
+                    label="Add To Cart"
+                    (click)="showModalDialog(product)"
+                  ></button>
+                </div>
+              </div>
+   
+            </div>
+          </div>
+        </ng-template>
+      </p-dataView>
+    </div>
+  </div>
+
+  <div class="slide"></div>
+</div>
+<p-messages [(value)]="msgs"></p-messages>
+<form [formGroup]="addItem">
+  <p-dialog
+    header="ENTER THE QUANTITY"
+    [(visible)]="displayModal"
+    [modal]="true"
+    [style]="{ width: '50vw' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <!-- <p class="m-0">Are you sure want to add to cart?</p> -->
+    <br /><br />
+
+    <div class="confirmation p-fluid">
+
+      <input
+        type="number"
+        placeholder="Enter Quantity"
+        pInputText
+        formControlName="Quantity"
+        [class.is-invalid]="Quantity.invalid && (Quantity.dirty || Quantity.touched)"
+      /><br />
+      <div *ngIf="Quantity.invalid && (Quantity.dirty || Quantity.touched)" class="invalid-feedback labelstyle">
+        <div *ngIf="Quantity.errors?.['required']">
+          * Quantity is required.
+        </div>       
+      </div>
+</div>
+
+      <br />
+<!-- <div *ngIf="Quantity.errors?.['minlength']">
+          This field must have at least 1 character.
+        </div>
+        <div *ngIf="Quantity.errors?.['maxlength']">
+          This field must have at most 250 characters.
+        </div> -->
+      <!-- <input
+        type="text"
+        placeholder="uom"
+        pInputText
+        formControlName="uom"
+      /> -->
+      <br />
+      <div *ngFor="let category of uomCodes">
+        <p-radioButton
+          class="col-2 p-field-checkbox"
+          value="{{ category }}"
+          label="{{ category }}"
+          [(ngModel)]="selectedCategory"
+          inputId="opt1"
+          formControlName="myRadio"
+        ></p-radioButton
+        > &nbsp;&nbsp; <br />
+      </div>
+      
+ 
+    <ng-template pTemplate="footer">
+      <p-button
+        label="Add to Cart"
+        styleClass="p-button-text"
+        (click)="addToCart()"
+      ></p-button>
+    </ng-template>
+  </p-dialog>
+</form>
+<p-toast position="top-right" key="tl"></p-toast>

@@ -1,0 +1,67 @@
+.login-body {
+  text-align: center;
+  justify-content: center;
+}
+.mat-card {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+}
+.card-body {
+  background-color: var(--pink-100) !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 8px 0;
+}
+
+p {
+  margin: 0;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.toolbar {
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  right: 0;
+
+  height: 70px;
+
+  display: flex;
+
+  align-items: center;
+
+  background-color: #f3f0f0;
+
+  color: white;
+
+  font-weight: 600;
+}
+
+.toolbar img {
+  margin: 0 16px;
+}
+.alert-danger {
+  float: left;
+}
+.labelstyle {
+  float: left;
+  padding: 0.2rem;
+  font-size: 12px;
+  margin-top: .2rem;
+  margin-bottom: .2rem;
+  margin-left: .2rem;
+  color: red;
+}
+

@@ -1,0 +1,83 @@
+<div class="toolbar">    <img width="100" height="40" alt="Angular Logo" routerLink="/home" src="\assets\app_industries_logo.png" />   
+  <div class="spacer">       
+      <div class="login-panel p-fluid">       
+      </div> 
+       
+  </div>   
+  <button pButton pRipple type="button" icon="pi pi-chevron-left" label="Back"    
+      class="p-button-rounded p-button-secondary p-button-text" routerLink="/home"></button>      
+    &nbsp;&nbsp;   
+</div>
+<br><br><br><br>
+
+<div *ngIf="getordersdata" class="surface-section px-4 py-8 md:px-6 lg:px-8">
+  <div class="font-medium text-3xl text-900 mb-3">#Order {{getordersdata.id}} </div>
+  <ul class="list-none p-0 m-0" *ngFor="let item of getordersdata.details">
+      <li class="flex flex-column md:flex-row border-top-1 border-bottom-1 surface-border md:align-items-center">
+          <div class="flex-auto py-2">
+              <div
+                  class="flex flex-wrap align-items-start sm:align-items-center sm:flex-row sm:justify-content-between surface-border">
+                  <div class="w-full sm:w-6 flex flex-column">
+                      <span class="text-900 text-xl font-medium mb-3">{{item.itemName}}</span>
+                  </div>
+                  <div class="w-full sm:w-6 flex align-items-start justify-content-between mt-1 sm:mt-0">
+                      <div>
+
+                      </div>
+                      <div class="flex flex-column sm:align-items-end">
+                          <span class="text-900 text-xl font-medium mb-2 sm:mb-0"></span>
+                          
+                          <a class="flex flex-column sm:align-items-end">Qty:{{item.qty}}</a>
+                      </div>
+                  </div>
+              </div>
+              <div class="flex flex-column">
+                  <span class="inline-flex align-items-center mb-0">
+                      <span class="text-600 mr-2">Item Code : {{item.itemCode}}</span>
+                  </span>
+                  <span class="inline-flex align-items-center mb-0">
+                      <span class="text-600 mr-1">UOM : {{item.uom}}</span>
+                  </span>
+              </div>
+          </div>
+      </li>
+  </ul>
+  <div class="flex">
+      <div class="w-12rem hidden md:block"></div>
+      <ul class="list-none py-0 pr-0 pl-0 md:pl-5 mt-6 mx-0 mb-0 flex-auto">
+          <li class="flex justify-content-between mb-4">
+              
+          </li>
+      </ul>
+  </div>
+  <div >
+    <ul class="list-none p-0 m-0">
+        
+        
+        <li class="flex align-items-center py-2 px-2 surface-border flex-wrap" *ngIf="getordersdata.remarks">
+            <div class="text-900 w-6 md:w-2 font-medium">Remarks :</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+
+              <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="getordersdata.remarks" />
+            </div>
+            
+        </li>
+        <li class="flex align-items-center py-2 px-2 surface-border flex-wrap">
+            <div class="text-900 w-6 md:w-2 font-medium">Po No : </div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+              <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="getordersdata.poNumber" />
+              </div>
+            
+        </li>
+        <li class="flex  py-2 px-2  surface-border flex-wrap">
+            <div class="text-900 w-6 md:w-2 font-medium">Address :</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 " style="white-space:pre-line">
+             
+              <textarea rows="3" cols="30" pInputTextarea [autoResize]="true" [disabled]="true">{{getordersdata.address}}</textarea>
+                </div>
+            
+        </li>
+    </ul>
+</div>
+
+</div>
